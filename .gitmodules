@@ -1,0 +1,6 @@
+[submodule "lsc"]
+	path = lsc
+	url = https://github.com/yangkevin2/lsc
+[submodule "chemprop"]
+	path = chemprop
+	url = https://github.com/yangkevin2/chemprop
