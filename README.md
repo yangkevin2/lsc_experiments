@@ -1,5 +1,5 @@
 # lsc_experiments
-Scripts for running lsc model on other datasets. 
+Scripts for running lsc model (from https://pubs.rsc.org/en/Content/ArticleLanding/2018/SC/c8sc00148k) on other datasets. 
 
 Install requirements by running "source install.sh" from the scripts directory, which gives you the necessary conda envs. 
 
