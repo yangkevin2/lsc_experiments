@@ -16,6 +16,8 @@ DATASETS = OrderedDict()
 DATASETS[args.data_name] = (args.dataset_type, args.data_path)
 
 def fps(dataset):
+    os.makedirs('maccs', exist_ok=True)
+    os.makedirs('rdkfp', exist_ok=True)
     with open(DATASETS[dataset][1], 'r') as f:
         f.readline()
         mols = []

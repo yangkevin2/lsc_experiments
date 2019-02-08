@@ -17,6 +17,11 @@ DATASETS[args.data_name] = (args.dataset_type, args.data_path)
 placeholder = '__PLACEHOLDER__'
 
 def pubchem_fps(dataset):
+    try: 
+        os.makedirs('pubchem_fps')
+    except OSError:
+        if not os.path.isdir('pubchem_fps'):
+            raise
     with open(DATASETS[dataset][1], 'r') as f:
         f.readline()
         mols = []

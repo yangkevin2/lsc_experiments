@@ -14,6 +14,9 @@ args = parser.parse_args()
 DATASETS = OrderedDict()
 DATASETS[args.data_name] = (args.dataset_type, args.data_path)
 
+os.makedirs('semiF', exist_ok=True)
+os.makedirs('lsc_data', exist_ok=True)
+
 with open('indices.pckl', 'rb') as f:
     indices = pickle.load(f)
 with open('targetNames.pckl', 'rb') as f:
