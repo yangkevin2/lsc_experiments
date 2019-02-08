@@ -4,3 +4,5 @@ Scripts for running lsc model (from https://pubs.rsc.org/en/Content/ArticleLandi
 Install requirements by running "source install.sh" from the scripts directory, which gives you the necessary conda envs. 
 
 You can then run "source main.sh" from the scripts directory with the required arguments; see that file for details. 
+
+Note: if you see an error about "rm: cannot remove ... o0003.start.pckl" you can safely ignore it. 
