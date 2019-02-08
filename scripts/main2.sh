@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # USAGE: source main2.sh dataName dataPath dataType numGpus numHyperIters chempropenv gpu
-# example: source main2.sh freesolv ../data/freesolv/freesolv.csv regression 1 20 py36_paper_experiments 0
+# example: source main2.sh freesolv ../data/freesolv/freesolv.csv regression 1 20 py36_paper_experiments
 
 # assumes data is ordered chronologically for a time split, has been deduplicated, and is in the format expected by the chemprop model.
 # put data in a folder analogous to the freesolv example.
@@ -12,7 +12,7 @@ dataType=$3 # regression or classification
 numGpus=$4 # number of available gpus
 numHyperIters=$5 # number of hyperparameter sets to try
 chempropenv=$6 # python3 conda env with chemprop requirements installed.
-gpu=$7
+gpu=0
 
 featuresPath="../features/rdkit_2d_normalized/${dataName}.pckl"
 
