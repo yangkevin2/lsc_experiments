@@ -22,11 +22,11 @@ gpu=$9
 
 echo "dump features pickle files and splits"
 bash generate_all_features.sh $dataName $dataPath $dataType $python2env $chempropenv
-source create_splits.sh $dataName $dataPath $dataType $chempropenv
+source create_splits2.sh $dataName $dataPath $dataType $chempropenv
 
-echo "run model" # defaults to using gpu0. See run_model.sh if you want to change the gpu. 
+echo "run model" # defaults to using gpu0. See run_model2.sh if you want to change the gpu. 
 cd ../lsc/pythonCode/apred
-bash run_model.sh $dataName $dataType $metric $batchSize $tfenv $gpu
+bash run_model2.sh $dataName $dataType $metric $batchSize $tfenv $gpu
 
 echo "write output"
 source activate $chempropenv
