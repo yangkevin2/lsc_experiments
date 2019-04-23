@@ -25,8 +25,8 @@ for dataset in DATASETS.keys():
     val_cutoff = int(count*0.9)
     folds = [indices[:train_cutoff], indices[train_cutoff:val_cutoff], indices[val_cutoff:]]
     for i in range(13):
-        os.makedirs(os.path.join(os.path.dirname(path), 'time', 'fold_' + str(i)), exist_ok=True)
-        with open(os.path.join(os.path.dirname(path), 'time', 'fold_' + str(i), 'split_indices.pckl'), 'wb') as wf:
+        os.makedirs(os.path.join(os.path.dirname(path), 'time', 'fold_' + str(i), '0'), exist_ok=True)
+        with open(os.path.join(os.path.dirname(path), 'time', 'fold_' + str(i), '0', 'split_indices.pckl'), 'wb') as wf:
             pickle.dump(folds, wf)
     train_path = os.path.join(os.path.dirname(path), dataset + '_train_time.csv')
     val_path = os.path.join(os.path.dirname(path), dataset + '_val_time.csv')

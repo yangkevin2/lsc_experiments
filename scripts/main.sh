@@ -20,16 +20,19 @@ tfenv=$8 # python3 conda env with tensorflow.
 
 gpu=$9
 
+test_folds_to_test=${10}
+val_folds_per_test=${11}
+
 echo "dump features pickle files and splits"
 bash generate_all_features.sh $dataName $dataPath $dataType $python2env $chempropenv
-source create_splits2.sh $dataName $dataPath $dataType $chempropenv
+source create_splits2.sh $dataName $dataPath $dataType $chempropenv $test_folds_to_test $val_folds_per_test
 
 echo "run model" # defaults to using gpu0. See run_model2.sh if you want to change the gpu. 
 cd ../lsc/pythonCode/apred
-bash run_model2.sh $dataName $dataType $metric $batchSize $tfenv $gpu
+bash run_model2.sh $dataName $dataType $metric $batchSize $tfenv $gpu $test_folds_to_test $val_folds_per_test
 
 echo "write output"
 source activate $chempropenv
 cd ../../../scripts
-python compile_lsc_results.py
+python compile_lsc_results.py --num_test_folds $test_folds_to_test
 source deactivate
