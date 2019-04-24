@@ -6,7 +6,12 @@ parser = ArgumentParser()
 parser.add_argument("--num_test_folds", help="num test folds for each split", type=int, default=10)
 args = parser.parse_args()
 
-folders = ['../compare_lsc_random', '../compare_lsc_scaffold', '../compare_lsc_time']
+folders = ['../compare_lsc_random',
+           '../compare_lsc_scaffold',
+           '../compare_lsc_time',
+           '../compare_lsc_time_window/random',
+           '../compare_lsc_time_window/scaffold',
+           '../compare_lsc_time_window/time']
 
 for folder in folders:
     print(folder)

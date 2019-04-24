@@ -4,3 +4,6 @@
 [submodule "chemprop"]
 	path = chemprop
 	url = https://github.com/yangkevin2/chemprop
+[submodule "clean/chemprop"]
+	path = clean/chemprop
+	url = https://github.com/swansonk14/chemprop.git
