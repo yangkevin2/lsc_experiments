@@ -96,13 +96,13 @@ echo "FFN on RDKit"
 echo "Random"
 for ((i=0;i<num_test_folds;i++)); do
     #gpu=$((($gpu + 1) % $numGpus))
-    CUDA_VISIBLE_DEVICES=$gpu python train.py --data_path ../$dataPath --dataset_type $dataType --features_only --features_path ${featuresPath}.npz --no_features--seed 3 --save_dir ../ckpt/${dataName}_rdkit_random_$i --quiet --split_type predetermined --folds_file ../../data/${dataName}/random/fold_$i/0/split_indices.pckl --val_fold_index 1 --test_fold_index 2 &
+    CUDA_VISIBLE_DEVICES=$gpu python train.py --data_path ../$dataPath --dataset_type $dataType --features_only --features_path ${featuresPath}.npz --no_features_scaling --seed 3 --save_dir ../ckpt/${dataName}_rdkit_random_$i --quiet --split_type predetermined --folds_file ../../data/${dataName}/random/fold_$i/0/split_indices.pckl --val_fold_index 1 --test_fold_index 2 &
 done
 wait
 echo "Scaffold"
 for ((i=0;i<num_test_folds;i++)); do
     #gpu=$((($gpu + 1) % $numGpus))
-    CUDA_VISIBLE_DEVICES=$gpu python train.py --data_path ../$dataPath --dataset_type $dataType --features_only --features_path ${featuresPath}.npz --no_features--seed 3 --save_dir ../ckpt/${dataName}_rdkit_scaffold_$i --quiet --split_type predetermined --folds_file ../../data/${dataName}/scaffold/fold_$i/0/split_indices.pckl --val_fold_index 1 --test_fold_index 2 &
+    CUDA_VISIBLE_DEVICES=$gpu python train.py --data_path ../$dataPath --dataset_type $dataType --features_only --features_path ${featuresPath}.npz --no_features_scaling --seed 3 --save_dir ../ckpt/${dataName}_rdkit_scaffold_$i --quiet --split_type predetermined --folds_file ../../data/${dataName}/scaffold/fold_$i/0/split_indices.pckl --val_fold_index 1 --test_fold_index 2 &
 done
 wait
 if [ "$time_split" == "true" ]
@@ -110,9 +110,9 @@ then
 echo "Time Window"
 for ((i=0;i<num_test_folds;i++)); do
     #gpu=$((($gpu + 1) % $numGpus))
-    CUDA_VISIBLE_DEVICES=$gpu python train.py --data_path ../$dataPath --dataset_type $dataType --features_only --features_path ${featuresPath}.npz --no_features--seed 3 --save_dir ../ckpt/${dataName}_rdkit_time_window/random_$i --quiet --split_type predetermined --folds_file ../../data/${dataName}/time_window/random/fold_$i/0/split_indices.pckl --val_fold_index 1 --test_fold_index 2 &
-    CUDA_VISIBLE_DEVICES=$gpu python train.py --data_path ../$dataPath --dataset_type $dataType --features_only --features_path ${featuresPath}.npz --no_features--seed 3 --save_dir ../ckpt/${dataName}_rdkit_time_window/scaffold_$i --quiet --split_type predetermined --folds_file ../../data/${dataName}/time_window/scaffold/fold_$i/0/split_indices.pckl --val_fold_index 1 --test_fold_index 2 &
-    CUDA_VISIBLE_DEVICES=$gpu python train.py --data_path ../$dataPath --dataset_type $dataType --features_only --features_path ${featuresPath}.npz --no_features--seed 3 --save_dir ../ckpt/${dataName}_rdkit_time_window/time_$i --quiet --split_type predetermined --folds_file ../../data/${dataName}/time_window/time/fold_$i/0/split_indices.pckl --val_fold_index 1 --test_fold_index 2 &
+    CUDA_VISIBLE_DEVICES=$gpu python train.py --data_path ../$dataPath --dataset_type $dataType --features_only --features_path ${featuresPath}.npz --no_features_scaling --seed 3 --save_dir ../ckpt/${dataName}_rdkit_time_window/random_$i --quiet --split_type predetermined --folds_file ../../data/${dataName}/time_window/random/fold_$i/0/split_indices.pckl --val_fold_index 1 --test_fold_index 2 &
+    CUDA_VISIBLE_DEVICES=$gpu python train.py --data_path ../$dataPath --dataset_type $dataType --features_only --features_path ${featuresPath}.npz --no_features_scaling --seed 3 --save_dir ../ckpt/${dataName}_rdkit_time_window/scaffold_$i --quiet --split_type predetermined --folds_file ../../data/${dataName}/time_window/scaffold/fold_$i/0/split_indices.pckl --val_fold_index 1 --test_fold_index 2 &
+    CUDA_VISIBLE_DEVICES=$gpu python train.py --data_path ../$dataPath --dataset_type $dataType --features_only --features_path ${featuresPath}.npz --no_features_scaling --seed 3 --save_dir ../ckpt/${dataName}_rdkit_time_window/time_$i --quiet --split_type predetermined --folds_file ../../data/${dataName}/time_window/time/fold_$i/0/split_indices.pckl --val_fold_index 1 --test_fold_index 2 &
 done
 echo "Time"
 #gpu=$((($gpu + 1) % $numGpus))
