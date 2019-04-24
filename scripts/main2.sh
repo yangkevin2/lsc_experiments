@@ -306,7 +306,7 @@ echo "Optimized + Features + Ensemble MPN complete"
 
 cd ../ckpt
 
-python ../../scripts/compile_main2.py
+python ../../scripts/compile_main2results.py
 
 cd ../../scripts
 
