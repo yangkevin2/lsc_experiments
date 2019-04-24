@@ -43,6 +43,8 @@ for ((i=0;i<num_test_folds;i++)); do
     CUDA_VISIBLE_DEVICES=$gpu python train.py --data_path $dataPath --dataset_type $dataType --features_only --features_generator morgan --save_dir ../ckpt/${dataName}_morgan_scaffold_$i --quiet --split_type predetermined --folds_file ../data/${dataName}/scaffold/fold_$i/0/split_indices.pckl --val_fold_index 1 --test_fold_index 2 &
 done
 wait
+if [ "$time_split" == "true" ]
+then
 echo "Time Window"
 for ((i=0;i<num_test_folds;i++)); do
     gpu=$((($gpu + 1) % $numGpus))
@@ -54,10 +56,10 @@ echo "Time"
 gpu=$((($gpu + 1) % $numGpus))
 CUDA_VISIBLE_DEVICES=$gpu python train.py --data_path $dataPath --dataset_type $dataType --features_only --features_generator morgan --num_folds 10 --seed 3 --save_dir ../ckpt/${dataName}_morgan_time --quiet --split_type predetermined --folds_file ../data/${dataName}/time/fold_0/0/split_indices.pckl --val_fold_index 1 --test_fold_index 2 &
 wait
+fi
 
 echo "FFN on Morgan counts"
 echo "Random"
-
 for ((i=0;i<num_test_folds;i++)); do
     gpu=$((($gpu + 1) % $numGpus))
     CUDA_VISIBLE_DEVICES=$gpu python train.py --data_path $dataPath --dataset_type $dataType --features_only --features_generator morgan_count --save_dir ../ckpt/${dataName}_morgan_count_random_$i --quiet --split_type predetermined --folds_file ../data/${dataName}/random/fold_$i/0/split_indices.pckl --val_fold_index 1 --test_fold_index 2 &
@@ -69,6 +71,8 @@ for ((i=0;i<num_test_folds;i++)); do
     CUDA_VISIBLE_DEVICES=$gpu python train.py --data_path $dataPath --dataset_type $dataType --features_only --features_generator morgan_count --save_dir ../ckpt/${dataName}_morgan_count_scaffold_$i --quiet --split_type predetermined --folds_file ../data/${dataName}/scaffold/fold_$i/0/split_indices.pckl --val_fold_index 1 --test_fold_index 2 &
 done
 wait
+if [ "$time_split" == "true" ]
+then
 echo "Time Window"
 for ((i=0;i<num_test_folds;i++)); do
     gpu=$((($gpu + 1) % $numGpus))
@@ -80,6 +84,7 @@ echo "Time"
 gpu=$((($gpu + 1) % $numGpus))
 CUDA_VISIBLE_DEVICES=$gpu python train.py --data_path $dataPath --dataset_type $dataType --features_only --features_generator morgan_count --num_folds 10 --seed 3 --save_dir ../ckpt/${dataName}_morgan_count_time --quiet --split_type predetermined --folds_file ../data/${dataName}/time/fold_0/0/split_indices.pckl --val_fold_index 1 --test_fold_index 2 &
 wait
+fi
 
 echo "FFN on RDKit"
 echo "Random"
@@ -94,6 +99,8 @@ for ((i=0;i<num_test_folds;i++)); do
     CUDA_VISIBLE_DEVICES=$gpu python train.py --data_path $dataPath --dataset_type $dataType --features_only --features_path $featuresPath --no_features--seed 3 --save_dir ../ckpt/${dataName}_rdkit_scaffold_$i --quiet --split_type predetermined --folds_file ../data/${dataName}/scaffold/fold_$i/0/split_indices.pckl --val_fold_index 1 --test_fold_index 2 &
 done
 wait
+if [ "$time_split" == "true" ]
+then
 echo "Time Window"
 for ((i=0;i<num_test_folds;i++)); do
     gpu=$((($gpu + 1) % $numGpus))
@@ -104,8 +111,8 @@ done
 echo "Time"
 gpu=$((($gpu + 1) % $numGpus))
 CUDA_VISIBLE_DEVICES=$gpu python train.py --data_path $dataPath --dataset_type $dataType --features_only --features_path $featuresPath --no_features_scaling --num_folds 10 --seed 3 --save_dir ../ckpt/${dataName}_rdkit_time --quiet --split_type predetermined --folds_file ../data/${dataName}/time/fold_0/0/split_indices.pckl --val_fold_index 1 --test_fold_index 2 &
-
 wait
+fi
 
 echo "Baselines complete"
 
@@ -124,6 +131,8 @@ for ((i=0;i<num_test_folds;i++)); do
     CUDA_VISIBLE_DEVICES=$gpu python train.py --data_path $dataPath --dataset_type $dataType --save_dir ../ckpt/${dataName}_mpn_scaffold_$i --quiet --split_type predetermined --folds_file ../data/${dataName}/scaffold/fold_$i/0/split_indices.pckl --val_fold_index 1 --test_fold_index 2 &
 done
 wait
+if [ "$time_split" == "true" ]
+then
 echo "Time Window"
 for ((i=0;i<num_test_folds;i++)); do
     gpu=$((($gpu + 1) % $numGpus))
@@ -135,6 +144,7 @@ echo "Time"
 gpu=$((($gpu + 1) % $numGpus))
 CUDA_VISIBLE_DEVICES=$gpu python train.py --data_path $dataPath --dataset_type $dataType --num_folds 10 --seed 3 --save_dir ../ckpt/${dataName}_mpn_time --quiet  --split_type predetermined --folds_file ../data/${dataName}/time/fold_0/0/split_indices.pckl --val_fold_index 1 --test_fold_index 2 &
 wait
+fi
 
 echo "Default MPN + Features"
 echo "Random"
@@ -149,6 +159,8 @@ for ((i=0;i<num_test_folds;i++)); do
     CUDA_VISIBLE_DEVICES=$gpu python train.py --data_path $dataPath --dataset_type $dataType --save_dir ../ckpt/${dataName}_mpn_features_scaffold_$i --quiet --split_type predetermined --folds_file ../data/${dataName}/scaffold/fold_$i/0/split_indices.pckl --val_fold_index 1 --test_fold_index 2 --features_path $featuresPath --no_features_scaling &
 done
 wait
+if [ "$time_split" == "true" ]
+then
 echo "Time Window"
 for ((i=0;i<num_test_folds;i++)); do
     gpu=$((($gpu + 1) % $numGpus))
@@ -160,6 +172,7 @@ echo "Time"
 gpu=$((($gpu + 1) % $numGpus))
 CUDA_VISIBLE_DEVICES=$gpu python train.py --data_path $dataPath --dataset_type $dataType --num_folds 10 --seed 3 --save_dir ../ckpt/${dataName}_mpn_features_time --quiet  --split_type predetermined --folds_file ../data/${dataName}/time/fold_0/0/split_indices.pckl --val_fold_index 1 --test_fold_index 2 --features_path $featuresPath --no_features_scaling &
 wait
+fi
 
 
 echo "Hyperparameter Optimization"
@@ -175,6 +188,8 @@ for ((i=0;i<num_test_folds;i++)); do
     CUDA_VISIBLE_DEVICES=$gpu python hyperparameter_optimization.py --data_path $dataPath --dataset_type $dataType --num_iters $numHyperIters --config_save_path ../ckpt/${dataName}_hyper/scaffold/$i.json --quiet --split_type index_predetermined --crossval_index_file ../data/${dataName}/scaffold/fold_$i/split_indices.pckl --features_path $featuresPath --no_features_scaling --metric $metric &
 done
 wait
+if [ "$time_split" == "true" ]
+then
 echo "Time Window"
 for ((i=0;i<num_test_folds;i++)); do
     gpu=$((($gpu + 1) % $numGpus))
@@ -186,6 +201,7 @@ echo "Time"
 gpu=$((($gpu + 1) % $numGpus))
 CUDA_VISIBLE_DEVICES=$gpu python hyperparameter_optimization.py --data_path $dataPath --dataset_type $dataType --num_iters $numHyperIters --config_save_path ../ckpt/${dataName}_hyper/time/0.json --quiet --split_type predetermined --folds_file ../data/${dataName}/time/fold_0/0/split_indices.pckl --val_fold_index 1 --test_fold_index 2 --features_path $featuresPath --no_features_scaling --metric $metric &
 wait
+fi
 
 echo "Default MPN and Hyperparameter Optimization complete"
 
@@ -219,6 +235,8 @@ for ((i=0;i<num_test_folds;i++)); do
     CUDA_VISIBLE_DEVICES=$gpu python train.py --data_path $dataPath --dataset_type $dataType --save_dir ../ckpt/${dataName}_mpn_optimized_features_scaffold_$i --quiet --split_type predetermined --folds_file ../data/${dataName}/scaffold/fold_$i/0/split_indices.pckl --val_fold_index 1 --test_fold_index 2 --config_path ../ckpt/${dataName}_hyper/scaffold/$i.json --features_path $featuresPath --no_features_scaling &
 done
 wait
+if [ "$time_split" == "true" ]
+then
 echo "Time Window"
 for ((i=0;i<num_test_folds;i++)); do
     gpu=$((($gpu + 1) % $numGpus))
@@ -230,6 +248,7 @@ echo "Time"
 gpu=$((($gpu + 1) % $numGpus))
 CUDA_VISIBLE_DEVICES=$gpu python train.py --data_path $dataPath --dataset_type $dataType --num_folds 10 --seed 3 --save_dir ../ckpt/${dataName}_mpn_optimized_features_time --quiet  --split_type predetermined --folds_file ../data/${dataName}/time/fold_0/split_indices.pckl --val_fold_index 1 --test_fold_index 2 --config_path ../ckpt/${dataName}_hyper/time/0.json --features_path $featuresPath --no_features_scaling &
 wait
+fi
 
 # echo "Optimized + Ensemble MPN"
 # echo "Random"
@@ -261,6 +280,8 @@ for ((i=0;i<num_test_folds;i++)); do
     CUDA_VISIBLE_DEVICES=$gpu python train.py --data_path $dataPath --dataset_type $dataType --save_dir ../ckpt/${dataName}_mpn_optimized_features_ensemble_scaffold_$i --quiet --split_type predetermined --folds_file ../data/${dataName}/scaffold/fold_$i/0/split_indices.pckl --val_fold_index 1 --test_fold_index 2 --config_path ../ckpt/${dataName}_hyper/scaffold/$i.json --features_path $featuresPath --no_features_scaling --ensemble_size 5 &
 done
 wait
+if [ "$time_split" == "true" ]
+then
 echo "Time Window"
 for ((i=0;i<num_test_folds;i++)); do
     gpu=$((($gpu + 1) % $numGpus))
@@ -272,8 +293,8 @@ done
 echo "Time"
 gpu=$((($gpu + 1) % $numGpus))
 CUDA_VISIBLE_DEVICES=$gpu python train.py --data_path $dataPath --dataset_type $dataType --num_folds 10 --seed 3 --save_dir ../ckpt/${dataName}_mpn_optimized_features_ensemble_time --quiet  --split_type predetermined --folds_file ../data/${dataName}/time/fold_0/0/split_indices.pckl --val_fold_index 1 --test_fold_index 2 --config_path ../ckpt/${dataName}_hyper/time/0.json --features_path $featuresPath --no_features_scaling --ensemble_size 5 &
-
 wait
+fi
 
 echo "Optimized + Features + Ensemble MPN complete"
 
