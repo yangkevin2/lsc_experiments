@@ -23,9 +23,13 @@ gpu=$9
 test_folds_to_test=${10}
 val_folds_per_test=${11}
 time_split=${12}
+run_features=${13}
 
 echo "dump features pickle files and splits"
-bash generate_all_features.sh $dataName $dataPath $dataType $python2env $chempropenv
+if [ "$run_features" == "true" ]
+then
+    bash generate_all_features.sh $dataName $dataPath $dataType $python2env $chempropenv
+fi
 source create_splits2.sh $dataName $dataPath $dataType $chempropenv $test_folds_to_test $val_folds_per_test $time_split
 
 echo "run model" # defaults to using gpu0. See run_model2.sh if you want to change the gpu. 

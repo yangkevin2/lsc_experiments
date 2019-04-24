@@ -17,7 +17,7 @@ val_folds_per_test=$8
 metric=$9
 time_split=${10}
 
-gpu=3
+gpu=${11}
 
 featuresPath="../features/rdkit_2d_normalized/${dataName}"
 featuresMorganPath="../features/morgan/${dataName}"
