@@ -21,6 +21,8 @@ gpu=0
 
 featuresPath="../features/rdkit_2d_normalized/${dataName}.pckl"
 
+source create_splits2.sh $dataName $dataPath $dataType $chempropenv $test_folds_to_test $val_folds_per_test $time_split
+
 source activate $chempropenv
 
 echo "Generating RDKit Features"
