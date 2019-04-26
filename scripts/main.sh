@@ -24,6 +24,7 @@ test_folds_to_test=${10}
 val_folds_per_test=${11}
 time_split=${12}
 run_features=${13}
+num_epochs=${14}
 
 echo "dump features pickle files and splits"
 if [ "$run_features" == "true" ]
@@ -34,7 +35,7 @@ source create_splits2.sh $dataName $dataPath $dataType $chempropenv $test_folds_
 
 echo "run model" # defaults to using gpu0. See run_model2.sh if you want to change the gpu. 
 cd ../lsc/pythonCode/apred
-bash run_model2.sh $dataName $dataType $metric $batchSize $tfenv $gpu $test_folds_to_test $val_folds_per_test $time_split
+bash run_model2.sh $dataName $dataType $metric $batchSize $tfenv $gpu $test_folds_to_test $val_folds_per_test $time_split $num_epochs $num_epochs
 
 echo "write output"
 source activate $chempropenv

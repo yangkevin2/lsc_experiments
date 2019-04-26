@@ -23,7 +23,7 @@ featuresPath="../features/rdkit_2d_normalized/${dataName}"
 featuresMorganPath="../features/morgan/${dataName}"
 featuresMorganCountPath="../features/morgan_count/${dataName}"
 
-source create_splits2.sh $dataName $dataPath $dataType $chempropenv $num_test_folds $val_folds_per_test $time_split
+# source create_splits2.sh $dataName $dataPath $dataType $chempropenv $num_test_folds $val_folds_per_test $time_split
 
 source activate $chempropenv
 
