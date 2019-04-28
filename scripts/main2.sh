@@ -29,9 +29,9 @@ source activate $chempropenv
 
 echo "Generating RDKit Features"
 cd ../clean/chemprop/scripts
-python save_features.py --data_path ../../$dataPath --features_generator rdkit_2d_normalized --save_path ../${featuresPath}.npz --restart
-python save_features.py --data_path ../../$dataPath --features_generator morgan --save_path ../${featuresMorganPath}.npz --restart
-python save_features.py --data_path ../../$dataPath --features_generator morgan_count --save_path ../${featuresMorganCountPath}.npz --restart
+python save_features.py --data_path ../../$dataPath --features_generator rdkit_2d_normalized --save_path ../${featuresPath}.npz --restart --sequential
+python save_features.py --data_path ../../$dataPath --features_generator morgan --save_path ../${featuresMorganPath}.npz --restart --sequential
+python save_features.py --data_path ../../$dataPath --features_generator morgan_count --save_path ../${featuresMorganCountPath}.npz --restart --sequential
 cd ..
 
 echo "Baselines"
@@ -185,13 +185,13 @@ echo "Hyperparameter Optimization"
 echo "Random"
 for ((i=0;i<num_test_folds;i++)); do
     #gpu=$((($gpu + 1) % $numGpus))
-    CUDA_VISIBLE_DEVICES=$gpu python hyperparameter_optimization.py --data_path ../$dataPath --dataset_type $dataType --num_iters $numHyperIters --config_save_path ../ckpt/${dataName}_hyper/random/$i.json --quiet --split_type index_predetermined --crossval_index_file ../data/${dataName}/random/fold_$i/split_indices.pckl --features_path ${featuresPath}.npz --no_features_scaling --metric $metric &
+    CUDA_VISIBLE_DEVICES=$gpu python hyperparameter_optimization.py --data_path ../$dataPath --dataset_type $dataType --num_iters $numHyperIters --config_save_path ../ckpt/${dataName}_hyper/random/$i.json --quiet --split_type index_predetermined --crossval_index_file ../../data/${dataName}/random/fold_$i/split_indices.pckl --features_path ${featuresPath}.npz --no_features_scaling --metric $metric &
 done
 wait
 echo "Scaffold"
 for ((i=0;i<num_test_folds;i++)); do
     #gpu=$((($gpu + 1) % $numGpus))
-    CUDA_VISIBLE_DEVICES=$gpu python hyperparameter_optimization.py --data_path ../$dataPath --dataset_type $dataType --num_iters $numHyperIters --config_save_path ../ckpt/${dataName}_hyper/scaffold/$i.json --quiet --split_type index_predetermined --crossval_index_file ../data/${dataName}/scaffold/fold_$i/split_indices.pckl --features_path ${featuresPath}.npz --no_features_scaling --metric $metric &
+    CUDA_VISIBLE_DEVICES=$gpu python hyperparameter_optimization.py --data_path ../$dataPath --dataset_type $dataType --num_iters $numHyperIters --config_save_path ../ckpt/${dataName}_hyper/scaffold/$i.json --quiet --split_type index_predetermined --crossval_index_file ../../data/${dataName}/scaffold/fold_$i/split_indices.pckl --features_path ${featuresPath}.npz --no_features_scaling --metric $metric &
 done
 wait
 if [ "$time_split" == "true" ]
@@ -199,9 +199,9 @@ then
 echo "Time Window"
 for ((i=0;i<num_test_folds;i++)); do
     #gpu=$((($gpu + 1) % $numGpus))
-    CUDA_VISIBLE_DEVICES=$gpu python hyperparameter_optimization.py --data_path ../$dataPath --dataset_type $dataType --num_iters $numHyperIters --config_save_path ../ckpt/${dataName}_hyper/time_window/random/$i.json --quiet --split_type index_predetermined --crossval_index_file ../data/${dataName}/time_window/random/fold_$i/split_indices.pckl --features_path ${featuresPath}.npz --no_features_scaling --metric $metric &
-    CUDA_VISIBLE_DEVICES=$gpu python hyperparameter_optimization.py --data_path ../$dataPath --dataset_type $dataType --num_iters $numHyperIters --config_save_path ../ckpt/${dataName}_hyper/time_window/scaffold/$i.json --quiet --split_type index_predetermined --crossval_index_file ../data/${dataName}/time_window/scaffold/fold_$i/split_indices.pckl --features_path ${featuresPath}.npz --no_features_scaling --metric $metric &
-    CUDA_VISIBLE_DEVICES=$gpu python hyperparameter_optimization.py --data_path ../$dataPath --dataset_type $dataType --num_iters $numHyperIters --config_save_path ../ckpt/${dataName}_hyper/time_window/time/$i.json --quiet --split_type index_predetermined --crossval_index_file ../data/${dataName}/time_window/time/fold_$i/split_indices.pckl --features_path ${featuresPath}.npz --no_features_scaling --metric $metric &
+    CUDA_VISIBLE_DEVICES=$gpu python hyperparameter_optimization.py --data_path ../$dataPath --dataset_type $dataType --num_iters $numHyperIters --config_save_path ../ckpt/${dataName}_hyper/time_window/random/$i.json --quiet --split_type index_predetermined --crossval_index_file ../../data/${dataName}/time_window/random/fold_$i/split_indices.pckl --features_path ${featuresPath}.npz --no_features_scaling --metric $metric &
+    CUDA_VISIBLE_DEVICES=$gpu python hyperparameter_optimization.py --data_path ../$dataPath --dataset_type $dataType --num_iters $numHyperIters --config_save_path ../ckpt/${dataName}_hyper/time_window/scaffold/$i.json --quiet --split_type index_predetermined --crossval_index_file ../../data/${dataName}/time_window/scaffold/fold_$i/split_indices.pckl --features_path ${featuresPath}.npz --no_features_scaling --metric $metric &
+    CUDA_VISIBLE_DEVICES=$gpu python hyperparameter_optimization.py --data_path ../$dataPath --dataset_type $dataType --num_iters $numHyperIters --config_save_path ../ckpt/${dataName}_hyper/time_window/time/$i.json --quiet --split_type index_predetermined --crossval_index_file ../../data/${dataName}/time_window/time/fold_$i/split_indices.pckl --features_path ${featuresPath}.npz --no_features_scaling --metric $metric &
 done
 echo "Time"
 #gpu=$((($gpu + 1) % $numGpus))

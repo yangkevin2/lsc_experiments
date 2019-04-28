@@ -27,11 +27,11 @@ run_features=${13}
 num_epochs=${14}
 
 echo "dump features pickle files and splits"
+source create_splits2.sh $dataName $dataPath $dataType $chempropenv $test_folds_to_test $val_folds_per_test $time_split
 if [ "$run_features" == "true" ]
 then
     bash generate_all_features.sh $dataName $dataPath $dataType $python2env $chempropenv
 fi
-source create_splits2.sh $dataName $dataPath $dataType $chempropenv $test_folds_to_test $val_folds_per_test $time_split
 
 echo "run model" # defaults to using gpu0. See run_model2.sh if you want to change the gpu. 
 cd ../lsc/pythonCode/apred

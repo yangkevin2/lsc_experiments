@@ -23,7 +23,10 @@ for folder in folders:
                 count = 0
                 for fold in range(args.num_test_folds):
                     last_line = None
-                    with open(os.path.join(folder, dataset, 'test', 'fold_' + str(fold), 'semi', 'dbg', 'o0003.dbg'), 'r') as f:
+                    filename = os.path.join(folder, dataset, 'test', 'fold_' + str(fold), 'semi', 'dbg', 'o0003.dbg')
+                    if not os.path.exists(filename):
+                        filename = os.path.join(folder, dataset, 'test', 'fold_' + str(fold), '0', 'semi', 'dbg', 'o0003.dbg')
+                    with open(filename, 'r') as f:
                         for line in f:
                             if len(line.strip()) > 0:
                                 last_line = line.strip()

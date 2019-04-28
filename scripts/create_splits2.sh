@@ -17,7 +17,7 @@ if [ "$time_split" == "true" ]
 then
     python create_crossval_indices.py --data_path ../../scripts/$dataPath --split_type time_window --num_folds 14 --time_folds_per_train_set 3 # so we get 10 sets of split indices
 fi
-cd ..
+cd ../../scripts
 source deactivate
 # cd ../chemprop
 # bash make_splits.sh $dataName $dataPath $dataType # random and scaffold folds
