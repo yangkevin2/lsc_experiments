@@ -12,12 +12,12 @@ dataType=$3 # regression or classification
 numGpus=$4 # number of available gpus
 numHyperIters=$5 # number of hyperparameter sets to try
 chempropenv=$6 # python3 conda env with chemprop requirements installed.
-num_test_folds=$7
-val_folds_per_test=$8
-metric=$9
-time_split=${10}
+num_test_folds=$7 # 3
+val_folds_per_test=$8 # 1
+metric=$9 # rmse
+time_split=${10} # true
 
-gpu=${11}
+gpu=${11} # gpu num to run on
 
 featuresPath="../features/rdkit_2d_normalized/${dataName}"
 featuresMorganPath="../features/morgan/${dataName}"
@@ -29,9 +29,9 @@ source activate $chempropenv
 
 echo "Generating RDKit Features"
 cd ../clean/chemprop/scripts
-python save_features.py --data_path ../../$dataPath --features_generator rdkit_2d_normalized --save_path ../${featuresPath}.npz --restart --sequential
-python save_features.py --data_path ../../$dataPath --features_generator morgan --save_path ../${featuresMorganPath}.npz --restart --sequential
-python save_features.py --data_path ../../$dataPath --features_generator morgan_count --save_path ../${featuresMorganCountPath}.npz --restart --sequential
+# python save_features.py --data_path ../../$dataPath --features_generator rdkit_2d_normalized --save_path ../${featuresPath}.npz --restart --sequential
+# python save_features.py --data_path ../../$dataPath --features_generator morgan --save_path ../${featuresMorganPath}.npz --restart --sequential
+# python save_features.py --data_path ../../$dataPath --features_generator morgan_count --save_path ../${featuresMorganCountPath}.npz --restart --sequential
 cd ..
 
 echo "Baselines"

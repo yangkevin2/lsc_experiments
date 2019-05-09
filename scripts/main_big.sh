@@ -35,7 +35,7 @@ fi
 
 echo "run model" # defaults to using gpu0. See run_model2.sh if you want to change the gpu. 
 cd ../lsc/pythonCode/apred
-bash run_model2.sh $dataName $dataType $metric $batchSize $tfenv $gpu $test_folds_to_test $val_folds_per_test $time_split $num_epochs $num_epochs
+bash run_model3.sh $dataName $dataType $metric $batchSize $tfenv $gpu $test_folds_to_test $val_folds_per_test $time_split $num_epochs $num_epochs
 
 echo "write output"
 source activate $chempropenv
